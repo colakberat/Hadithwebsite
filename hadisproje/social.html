@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Relations in Islam</title>
+    <style>
+        :root {
+            --primary-color: #1d3557;
+            --secondary-color: #457b9d;
+            --accent-color: #a8dadc;
+            --light-bg: #f1faee;
+            --dark-bg: #e5e5e5;
+            --text-color: #252525;
+            --light-text: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            height: 100vh;
+            margin: auto;       
+
+        }
+
+        .hadith-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            max-width: 900px;
+            width: 100%;
+            background-color: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08); 
+            margin: auto;
+        }
+        
+        .hadith-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hadith-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .hadith-topic {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 14px;    
+            font-weight: 500;
+            margin-bottom: 15px;
+        }
+
+        .hadith-text {
+            font-size: 17px;
+            margin-bottom: 20px;
+            line-height: 1.8;
+            color: var(--text-color);
+        }
+
+        .hadith-arabic {
+            font-family: 'Traditional Arabic', 'Scheherazade', Arial, sans-serif;
+            font-size: 22px;
+            line-height: 1.8;
+            text-align: right;
+            margin-bottom: 20px;
+            color: var(--text-color);
+            direction: rtl;
+            padding: 15px;
+            background-color: var(--light-bg);
+            border-radius: 8px;
+        }
+
+        .hadith-source {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-style: italic;
+            color: var(--light-text);
+            font-size: 14px;
+            padding-top: 15px;
+            border-top: 1px solid var(--dark-bg);
+        }
+
+        .footer {
+  background-color: #006847;
+  color: white;
+  padding: 60px 20px 30px;
+  margin-top: 50px;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-column h3 {
+  font-size: 18px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.footer-column ul {
+  list-style: none;
+}
+
+.footer-column ul li {
+  margin-bottom: 10px;
+}
+
+.footer-column ul li a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-column ul li a:hover {
+  color: white;
+}
+
+.social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.social-link {
+  color: white;
+  background-color: rgba(255, 255, 255, 0.1);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background-color 0.3s;
+}
+
+.social-link:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 14px;
+}
+
+.header {
+    background-color: #006847;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    top: 0;
+    z-index: 100;
+    position: sticky;
+    margin-bottom: 20px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 5%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 22px;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s;
+}
+
+.navbar-brand:hover {
+    transform: scale(1.05);
+}
+
+.navbar-links {
+    display: flex;
+    gap: 25px;
+}
+
+.navbar-links a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.navbar-links a:hover {
+    background-color: rgba(255, 255, 255, 0.15);
+}
+
+.navbar-links a.active {
+    background-color: rgba(255, 255, 255, 0.2);
+    font-weight: 500;
+}
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .page-title {
+            color: #0c753a;
+            font-size: 24px;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+        }
+        
+        @media (min-width: 768px) {
+            .topics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (min-width: 1024px) {
+            .topics-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        .topic-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        
+        .topic-card:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .topic-image {
+            height: 180px;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .topic-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .topic-content {
+            padding: 15px;
+        }
+        
+        .topic-title {
+            color: #0c753a;
+            font-weight: 600;
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        
+        .topic-description {
+            color: #666666;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .navbar-links {
+                width: 100%;
+                justify-content: center;
+            }
+             }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="navbar-brand">
+                <span>📚</span>
+                Hadisolog
+            </a>
+            <div class="navbar-links">
+                <a href="index.html" class="active"><span>🏠</span> Home</a>
+                <a href="topics.html"><span>📋</span> Topics</a>
+                <a href="multiple.html"><span>📝</span> Quiz</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="hadith-container">
+        <div class="hadith-card">
+            <span class="hadith-topic">Respecting Others</span>
+            <p class="hadith-text">"None of you truly believes until he loves for his brother what he loves for himself."</p>
+            <p class="hadith-text">"Sizden hiç kimse, kendisi için sevdiğini kardeşi için de sevmedikçe gerçek iman etmiş olmaz."</p>
+            <p class="hadith-arabic">لَا يُؤْمِنُ أَحَدُكُمْ حَتَّى يُحِبَّ لأَخِيهِ مَا يُحِبُّ لِنَفْسِهِ</p>
+            <div class="hadith-source">
+                <span>Sahih Bukhari</span>
+            </div>
+        </div>
+
+        <div class="hadith-card">
+            <span class="hadith-topic">Honoring Parents</span>
+            <p class="hadith-text">"And We have enjoined upon man [care] for his parents. His mother carried him with hardship upon hardship, and his weaning is in two years. Be grateful to Me and to your parents; to Me is the [final] destination."</p>
+            <p class="hadith-text">"Ve Biz insana ana-babasına iyi davranmasını emrettik. Annesi onu zorluk üstüne zorlukla taşıdı ve sütten kesilmesi iki yıl içinde oldu. Bana ve ana-babana şükret; varış yeri Banadır."</p>
+            <p class="hadith-arabic">وَوَصَّيْنَا الإِنسَانَ بِوَالِدَيْهِ حَمَلَتْهُ أُمُّهُ كُرْهًا عَلَىٰ كُرْهٍ وَفِصَالُهُ فِي عَامَيْنِ ۚ أَنِ اشْكُرْ لِي وَلِوَالِدَيْكَ إِلَيَّ الْمَصِيرُ</p>
+            <div class="hadith-source">
+                <span>Surah Luqman (31:14)</span>
+            </div>
+        </div>
+
+        <div class="hadith-card">
+            <span class="hadith-topic">Good Treatment of Neighbors</span>
+            <p class="hadith-text">"Whoever believes in Allah and the Last Day should not harm his neighbor. Whoever believes in Allah and the Last Day should honor his guest."</p>
+            <p class="hadith-text">"Kim Allah'a ve ahiret gününe inanıyorsa komşusuna eziyet etmesin. Kim Allah'a ve ahiret gününe inanıyorsa misafirine ikram etsin."</p>
+            <p class="hadith-arabic">مَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلَا يُؤْذِي جَارَهُ، وَمَنْ آمَنَ بِاللَّهِ وَالْيَوْمِ الْآخِرِ فَلْيُكْرِمْ ضَيْفَهُ</p>
+            <div class="hadith-source">
+                <span>Sahih Muslim</span>
+            </div>
+        </div>
+
+        <div class="hadith-card">
+            <span class="hadith-topic">Avoiding Envy</span>
+            <p class="hadith-text">"Do not envy one another, do not inflate prices to one another, do not hate one another, do not turn your backs on one another, and do not enter into a transaction while one of you is overcharging the other."</p>
+            <p class="hadith-text">"Birbirinize haset etmeyin, birbirinize fiyat yükseltmeyin, birbirinize kin beslemeyin, birbirinize sırt çevirmeyin ve birinizin diğerinin malını diğerinden fazla alarak alışveriş yapmayın."</p>
+            <p class="hadith-arabic">لَا تَحَاسَدُوا وَلَا تَجَارُوا وَلَا تَبَاغَضُوا وَلَا تَدَابَرُوا وَلَا يَبِعْ بَعْضُكُمْ عَلَىٰ بَيْعِ بَعْضٍ</p>
+            <div class="hadith-source">
+                <span>Sahih Muslim</span>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Hadisolog</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="topics.html">Topics</a></li>
+                    <li><a href="multiple.html">Quiz</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Hadith Library</a></li>
+                    <li><a href="#">Topic Categories</a></li>
+                    <li><a href="#">Quizzes</a></li>
+                    <li><a href="#">Guided Courses</a></li>
+                    <li><a href="#">Reference Materials</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Report an Issue</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">📱</a>
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📷</a>
+                </div>
+                <p style="margin-top: 20px; color: rgba(255,255,255,0.8);">
+                    Download our mobile app:<br>
+                    <a href="#" style="color: white; text-decoration: underline;">iOS</a> | 
+                    <a href="#" style="color: white; text-decoration: underline;">Android</a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            &copy; 2025 Hadith Learning. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hadisolog - Hadis öğrenme sitesi</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f8f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        /* Header and Navigation */
+        .header {
+            background-color: #006847;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 22px;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+            transition: transform 0.2s;
+        }
+        
+        .navbar-brand:hover {
+            transform: scale(1.05);
+        }
+        
+        .navbar-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .navbar-links a {
+            color: white;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        .navbar-links a:hover {
+            background-color: rgba(255, 255, 255, 0.15);
+        }
+        
+        .navbar-links a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+            font-weight: 500;
+        }
+        
+        /* Main Content */
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            text-align: center;
+            padding: 60px 20px 80px;
+            background: linear-gradient(to bottom, #ffffff, #f0f7f4);
+            border-radius: 12px;
+            margin-bottom: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .book-icon {
+            font-size: 70px;
+            color: #006847;
+            background-color: rgba(0, 104, 71, 0.1);
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            margin: 0 auto 25px;
+        }
+        
+        .welcome-title {
+            font-size: 36px;
+            color: #006847;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .welcome-subtitle {
+            font-size: 18px;
+            color: #555;
+            margin-bottom: 35px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .search-container {
+            max-width: 600px;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+        
+        .search-input {
+            width: 100%;
+            padding: 15px 20px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            font-size: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            padding-left: 50px;
+            transition: all 0.3s;
+        }
+        
+        .search-input:focus {
+            outline: none;
+            box-shadow: 0 2px 15px rgba(0,104,71,0.15);
+            border-color: #006847;
+        }
+        
+        .search-icon {
+            position: absolute;
+            left: 20px;
+            top: 15px;
+            color: #006847;
+        }
+        
+        /* Features Section */
+        .section-title {
+            text-align: center;
+            font-size: 28px;
+            color: #006847;
+            margin-bottom: 15px;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .feature-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            text-align: left;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .feature-icon {
+            font-size: 36px;
+            color: #006847;
+            margin-bottom: 20px;
+            background-color: rgba(0, 104, 71, 0.1);
+            width: 70px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+        }
+        
+        .feature-title {
+            font-size: 22px;
+            color: #006847;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .feature-description {
+            color: #666;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #006847;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s, transform 0.2s;
+            text-align: center;
+        }
+        
+        .btn:hover {
+            background-color: #00835c;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: #006847;
+            border: 2px solid #006847;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 104, 71, 0.1);
+        }
+        
+        /* Daily Hadith Section */
+        .daily-hadith-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 40px;
+            margin-bottom: 60px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .hadith-content {
+            font-size: 18px;
+            color: #444;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            font-style: italic;
+            position: relative;
+            padding: 0 40px;
+        }
+        
+        .hadith-content::before, .hadith-content::after {
+            content: '"';
+            font-size: 60px;
+            color: #006847;
+            opacity: 0.2;
+            position: absolute;
+        }
+        
+        .hadith-content::before {
+            top: -20px;
+            left: 0;
+        }
+        
+        .hadith-content::after {
+            bottom: -50px;
+            right: 0;
+        }
+        
+        .hadith-reference {
+            font-weight: 600;
+            color: #006847;
+            margin-bottom: 30px;
+        }
+        
+        /* Journey Section */
+        .journey-section {
+            background: linear-gradient(to right, #e8f5f0, #f0f7f4);
+            padding: 50px;
+            border-radius: 12px;
+            margin-bottom: 60px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+        }
+        
+        .journey-title {
+            color: #006847;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .journey-description {
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .stats-container {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 36px;
+            font-weight: 700;
+            color: #006847;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+        }
+        
+        /* Topics Preview */
+        .topics-preview {
+            margin-bottom: 60px;
+        }
+        
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .topic-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        
+        .topic-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .topic-icon {
+            font-size: 32px;
+            color: #006847;
+            margin-bottom: 15px;
+        }
+        
+        .topic-name {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        
+        .topic-count {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            margin-bottom: 60px;
+        }
+        
+        .testimonial-container {
+            display: flex;
+            gap: 30px;
+            overflow-x: auto;
+            padding: 20px 0;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 12px;
+            padding: 30px;
+            min-width: 300px;
+            scroll-snap-align: start;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        
+        .testimonial-text {
+            color: #555;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        
+        .testimonial-author {
+            font-weight: 600;
+            color: #006847;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: #006847;
+            color: white;
+            padding: 60px 20px 30px;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column ul li a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+        
+        .social-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .navbar-links {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .features-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hadith-content {
+                padding: 0 20px;
+            }
+            
+            .journey-section {
+                padding: 30px 20px;
+            }
+            
+            .stats-container {
+                gap: 20px;
+            }
+            
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero-section, .feature-card, .daily-hadith-section, .journey-section {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <a href="#" class="navbar-brand">
+                <span>📚</span>
+                Hadisolog
+            </a>
+            <div class="navbar-links">
+                <a href="index.html" class="active"><span>🏠</span> Home</a>
+                <a href="topics.html"><span>📋</span> Topics</a>
+                <a href="multiple.html"><span>📝</span> Quiz</a>
+            </div>
+        </nav>
+    </header>
+    
+    <main class="main-content">
+        <section class="hero-section">
+            <div class="book-icon">📚</div>
+            <h1 class="welcome-title">Hadisolog'a Hoşgeldiniz</h1>
+            <p class="welcome-subtitle">Hz. Muhammed'in (ﷺ) bilgeliğini sahih hadisler aracılığıyla keşfedin ve İslami öğretiler hakkındaki anlayışınızı derinleştirin</p>
+            
+            <div class="search-container">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Search hadiths, topics, or keywords...">
+            </div>
+        </section>
+        
+        <section class="daily-hadith-section">
+            <h2 class="section-title">Günün Hadisi</h2>
+            <p class="hadith-content">The Messenger of Allah (ﷺ) said, "The best of you are those who learn the Quran and teach it to others."</p>
+            <p class="hadith-content">Allah Resulü (ﷺ) şöyle buyurmuştur: "Sizin en hayırlınız, Kur'an'ı öğrenen ve onu başkalarına öğreteninizdir."</p>
+            <p class="hadith-reference">Sahih al-Bukhari 5027</p>
+            <a href="https://hadis.diyanet.gov.tr/" class="btn">Daha fazla bilgi</a>
+        </section>
+        
+        <section class="features-section">
+            <h2 class="section-title">Kaynaklarımızı keşfedin</h2>
+            <p class="section-subtitle">Hadisler ve İslami öğretiler hakkında bilgi edinmenize yardımcı olacak çeşitli araçları keşfedin</p>
+            
+            <div class="features-container">
+                <div class="feature-card">
+                    <div class="feature-icon">📋</div>
+                    <h3 class="feature-title">Konulara Göre Gözat</h3>
+                    <p class="feature-description">Konularına göre düzenlenmiş, detaylı açıklamalar ve günlük hayatta uygulayabileceğiniz pratik dersler içeren hadisleri keşfedin.</p>
+                    <a href="topics.html" class="btn">Konuları keşfet</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3 class="feature-title">Bilgini test et</h3>
+                    <p class="feature-description">Öğreniminizi pekiştirmek için hadis ve İslami öğretilerin farklı yönlerine ilişkin sınavlarla kendinize meydan okuyun.</p>
+                    <a href="multiple.html" class="btn">Sınava gir</a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">👨‍🏫</div>
+                    <h3 class="feature-title">Hadis hakkında</h3>
+                    <p class="feature-description">Hadis konusu hakkında bilgi edin ve bu konuda kendini geliştir.</p>
+                    <a href="#gel" class="btn">Bilgilere bak</a>
+                </div>
+            </div>
+        </section>
+        
+        <section class="topics-preview">
+            <h2 class="section-title">Popüler konular</h2>
+            <p class="section-subtitle">En çok incelenen hadis kategorilerimizden bazılarını keşfedin</p>
+            
+            <div class="topics-grid">
+                <div class="topic-card">
+                    <div class="topic-icon">🤲</div>
+                    <h3 class="topic-name">Prayer (Salah)</h3>
+                    <p class="topic-count">124 hadiths</p>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-icon">💖</div>
+                    <h3 class="topic-name">Character & Morals</h3>
+                    <p class="topic-count">98 hadiths</p>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-icon">🕋</div>
+                    <h3 class="topic-name">Hajj & Umrah</h3>
+                    <p class="topic-count">76 hadiths</p>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-icon">🌙</div>
+                    <h3 class="topic-name">Fasting (Sawm)</h3>
+                    <p class="topic-count">85 hadiths</p>
+                </div>
+                
+                <div class="topic-card">
+                    <div class="topic-icon">👪</div>
+                    <h3 class="topic-name">Family Life</h3>
+                    <p class="topic-count">112 hadiths</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <a href="topics.html" class="btn btn-secondary">Tüm konuları gör</a>
+            </div>
+        </section>
+        
+        <section class="journey-section">
+            <h2 class="journey-title">Öğrenme Yolculuğunuza Başlayın</h2>
+            <p class="journey-description">Gerçek hadis koleksiyonumuzu keşfedin, bilginizi sınavlarla test edin ve kapsamlı kaynaklarımız aracılığıyla İslami öğretiler hakkındaki anlayışınızı derinleştirin.</p>
+            
+            <a href="index.html" class="btn">Haydi Başla!</a>
+            
+            <div class="stats-container">
+                <div class="stat-item">
+                    <div class="stat-number">5,000+</div>
+                    <div class="stat-label">Sahih Hadisler</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Konu Kategorileri</div>
+                </div>
+                
+                <div class="stat-item">
+                    <div class="stat-number">100+</div>
+                    <div class="stat-label">Bilgi Sınavları</div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="testimonials" id="gel">
+            <h2 class="section-title">Hadis Konusu Hakkında</h2>
+            
+            <div class="testimonial-container">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Hadis, sözlü ve şifahî olanı ifade ederken sünnet davranışa özgü olanı ifade eden bir kavramdır. Bununla beraber İslâm geleneğinde Hz. Peygamber'in söz, fiil ve takrirlerine karşılık olmak üzere hadis ile sünnet sözcüklerinin eş anlamlı olarak kullanılması yaygınlık kazanmıştır."</p>
+                    <p class="testimonial-author">- Hadis nedir.</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"(726/1325) nisbet edilen bu tasnife göre hadisler sahih, hasen, müvessak ve zayıf diye dörde ayrılır. Senedindeki bütün râviler âdil İmâmî ise hadis sahih sayılır.."</p>
+                    <p class="testimonial-author">- Kaç tür hadis vardır.</p>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Bir veya iki rivayet zinciri ile nakledilen, hadisçilerin değerlendirmeleri çerçevesinde, kendi kriter ölçülerine göre hadise verdikleri bir değerlendirme sözüdür."</p>
+                    <p class="testimonial-author">- Sahih hadis nedir.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Hadith Learning</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="topics.html">Topics</a></li>
+                    <li><a href="multiple.html">Quiz</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Resources</h3>
+                <ul>
+                    <li><a href="#">Hadith Library</a></li>
+                    <li><a href="#">Topic Categories</a></li>
+                    <li><a href="#">Quizzes</a></li>
+                    <li><a href="#">Guided Courses</a></li>
+                    <li><a href="#">Reference Materials</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="#">Help Center</a></li>
+                    <li><a href="#">FAQs</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                    <li><a href="#">Feedback</a></li>
+                    <li><a href="#">Report an Issue</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Connect With Us</h3>
+                <div class="social-links">
+                    <a href="#" class="social-link">📱</a>
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">📷</a>
+                </div>
+                <p style="margin-top: 20px; color: rgba(255,255,255,0.8);">
+                    Download our mobile app:<br>
+                    <a href="#" style="color: white; text-decoration: underline;">iOS</a> | 
+                    <a href="#" style="color: white; text-decoration: underline;">Android</a>
+                </p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            &copy; 2025 Hadisolog. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Search functionality
+            const searchInput = document.querySelector('.search-input');
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    alert('Searching for: ' + searchInput.value);
+                    searchInput.value = '';
+                }
+            });
+            
+            // Language switcher
+            const languageItems = document.querySelectorAll('.language-item');
+            const languageBtn = document.querySelector('.language-btn');
+            
+            languageItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    languageBtn.innerHTML = `<span>🌐</span> ${this.textContent.substring(0, 2)}`;
+                    alert(`Language changed to ${this.textContent}`);
+                });
+            });
+        });
+
+    </script>
+</body>
+</html>

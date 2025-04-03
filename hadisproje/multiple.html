@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hadith Knowledge Quiz</title>
+  <link rel="stylesheet" href="multiple.css">
+</head>
+<body>
+
+  <header class="header">
+    <nav class="navbar">
+        <a href="#" class="navbar-brand">
+            <span>📚</span>
+            Hadisolog
+        </a>
+        <div class="navbar-links">
+            <a href="index.html" class="active"><span>🏠</span> Home</a>
+            <a href="topics.html"><span>📋</span> Topics</a>
+            <a href="multiple.html"><span>📝</span> Quiz</a>
+        </div>
+    </nav>
+</header>
+
+  <div id="quiz-container" class="quiz-container">
+    <div id="start-screen" class="start-screen">
+      <h1>Hadis Bilgisi Sınavı</h1>
+      
+      <div class="difficulty-selector">
+        <button class="difficulty-button" data-difficulty="easy">Kolay seviye</button>
+        <button class="difficulty-button" data-difficulty="medium">Orta seviye</button>
+        <button class="difficulty-button" data-difficulty="hard">Zor seviye</button>
+      </div>
+      
+      <button id="start-quiz-button" class="start-quiz-button">Sınavı Başlat</button>
+    </div>
+
+    <div id="quiz-screen" class="quiz-screen" style="display: none;">
+      <div id="question-container">
+        <p id="question-text"></p>
+        <div id="options-container"></div>
+      </div>
+      <div id="timer-container">
+        <span id="timer">30</span>
+      </div>
+      <div id="answer-feedback" style="display: none;">
+        <p id="explanation-text"></p>
+      </div>
+      <div id="control-buttons">
+        <button id="submit-answer" class="submit-button">Cevap Gönder</button>
+        <button id="next-question" class="next-button" style="display: none;">Sonraki Soru</button>
+        <button id="see-results" class="next-button" style="display: none;">Sonuçları Gör</button>
+      </div>
+    </div>
+
+    <div id="results-screen" class="results-screen" style="display: none;">
+      <h2>Sınav Sonuçları</h2>
+      <p id="results-text"></p>
+      <button id="retry-button" class="retry-button">Tekrar deneyin</button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-content">
+        <div class="footer-column">
+            <h3>Hadisolog</h3>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="topics.html">Topics</a></li>
+              <li><a href="multiple.html">Quiz</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Resources</h3>
+            <ul>
+                <li><a href="#">Hadith Library</a></li>
+                <li><a href="#">Topic Categories</a></li>
+                <li><a href="#">Quizzes</a></li>
+                <li><a href="#">Guided Courses</a></li>
+                <li><a href="#">Reference Materials</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Support</h3>
+            <ul>
+                <li><a href="#">Help Center</a></li>
+                <li><a href="#">FAQs</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Feedback</a></li>
+                <li><a href="#">Report an Issue</a></li>
+            </ul>
+        </div>
+        
+        <div class="footer-column">
+            <h3>Connect With Us</h3>
+            <div class="social-links">
+                <a href="#" class="social-link">📱</a>
+                <a href="#" class="social-link">📘</a>
+                <a href="#" class="social-link">🐦</a>
+                <a href="#" class="social-link">📷</a>
+            </div>
+            <p style="margin-top: 20px; color: rgba(255,255,255,0.8);">
+                Download our mobile app:<br>
+                <a href="#" style="color: white; text-decoration: underline;">iOS</a> | 
+                <a href="#" style="color: white; text-decoration: underline;">Android</a>
+            </p>
+        </div>
+    </div>
+    
+    <div class="footer-bottom">
+        &copy; 2025 Hadith Learning. All rights reserved.
+    </div>
+</footer>
+
+  <script src="multiple.js"></script>
+</body>
+</html>
